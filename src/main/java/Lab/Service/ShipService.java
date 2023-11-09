@@ -1,6 +1,7 @@
 package Lab.Service;
 
 import Lab.Exceptions.InvalidTonnageException;
+import Lab.Exceptions.NegativeWeightException;
 import Lab.Model.Ship;
 import Lab.Repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
  * attempting to get all ships. No ships should be persisted if any ship in the array has a negative or zero
  * tonnage - we're left to assume some form of unwanted user error in that case.
  */
+@Transactional(rollbackFor = InvalidTonnageException.class)
 @Service
 public class ShipService {
     ShipRepository shipRepository;
